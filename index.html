@@ -173,30 +173,40 @@
     let teams = [], at_images = {}, cardBack = "", isPaused = false;
     let game = { pHand:[], aiHand:[], board:[], deck:[], pCap:[], aiCap:[], turn:'p', selected:null, time:15, iv:null, isGameOver: false };
     
-    function drive(url) { 
-        if(!url || !url.includes('drive.google.com')) return url; 
-        let id = url.split('/d/')[1]?.split('/')[0] || url.split('id=')[1]?.split('&')[0]; 
-        return `https://lh3.googleusercontent.com/u/0/d/${id}`;
-    }
+function drive(url) { 
+    if(!url || !url.includes('drive.google.com')) return url; 
+    let id = url.split('/d/')[1]?.split('/')[0] || url.split('id=')[1]?.split('&')[0]; 
+    // Link này giúp hiển thị ảnh trực tiếp từ Drive lên web
+    return `https://lh3.googleusercontent.com/u/0/d/${id}`;
+}
 
-    window.onload = async () => {
-    const localData = localStorage.getItem('at_v23_data');
-    if(localData) {
-        const d = JSON.parse(localData);
-        at_images = d.images || {};
-        teams = d.teams || [];
-        cardBack = d.cardBack || "";
-    }
+window.onload = async () => {
+    // 1. Cố gắng nạp dữ liệu gốc từ data.json
     try {
         const res = await fetch('./data.json?t=' + Date.now());
         if (res.ok) {
             const data = await res.json();
-            if(!cardBack) cardBack = data.cardBack || "";
-            if(teams.length === 0) teams = data.teams || [];
-            if(Object.keys(at_images).length === 0) at_images = data.images || {};
+            // Nạp dữ liệu từ file vào các biến toàn cục
+            at_images = data.images || {};
+            teams = data.teams || [];
+            cardBack = data.cardBack || "";
+            console.log("Dữ liệu từ JSON đã sẵn sàng!");
         }
-    } catch (e) { console.log("Dùng dữ liệu Local."); }
+    } catch (e) { 
+        console.error("Lỗi khi đọc file JSON:", e); 
+    }
 
+    // 2. Kiểm tra nếu có dữ liệu người dùng đã lưu riêng trên máy (LocalStorage)
+    const localData = localStorage.getItem('at_v23_data');
+    if(localData) {
+        const d = JSON.parse(localData);
+        // Chỉ ghi đè nếu dữ liệu Local thực sự có nội dung
+        if(d.images && Object.keys(d.images).length > 0) at_images = d.images;
+        if(d.teams && d.teams.length > 0) teams = d.teams;
+        if(d.cardBack) cardBack = d.cardBack;
+    }
+
+    // 3. Sau khi chắc chắn đã có dữ liệu, mới bắt đầu hiển thị
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('play') === 'true') {
         startGame();
@@ -205,7 +215,6 @@
         renderAdmin();
     }
 };
-
     function renderAdmin() {
         document.getElementById('back-card-url').value = cardBack;
         document.getElementById('at-album').innerHTML = AT_NAMES.map((n, i) => `<div style="font-size:10px;">${i+1}. ${n} <input type="text" value="${at_images[i+1] || ''}" oninput="at_images[${i+1}]=this.value;saveData()" style="width:60%; background:#111; color:#fff;"></div>`).join('');
