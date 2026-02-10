@@ -114,7 +114,18 @@
         </div>
 
     </div>
+
 </div>
+<div id="back-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h2 style="color:#f1c40f; font-weight: bold; font-size: 20px;">Xác nhận quay lại phiên bản đơn giản?</h2>
+        <div style="display:flex; gap:10px; margin-top: 20px;">
+            <button class="btn" style="background:#27ae60; flex:1;" onclick="goToVersion1()">OK chắc rồi</button>
+            <button class="btn" style="background:#95a5a6; flex:1;" onclick="closeBackModal()">Ở lại đây</button>
+        </div>
+    </div>
+</div>
+    
 <div id="admin-panel">
     <div style="display:flex; justify-content: space-between; margin-bottom:10px;"><h2 style="color:var(--accent); margin:0;">ADMIN - QUẢN LÝ DỮ LIỆU</h2><button class="btn" style="background:#2ecc71; width:auto;" onclick="startGame()">VÀO CHƠI LUÔN</button></div>
     <div class="admin-grid">
@@ -125,26 +136,16 @@
 </div>
 
 <div id="game-screen" class="hidden">
-    <div class="rules-sidebar">
-        <h3>LUẬT CHƠI</h3>
-        <b>1. Mục tiêu:</b> Thu thập và xếp các lá bài theo đúng team (có liên kết) để ghi điểm<br><br>
-        <b>2. Chia bài:</b><br>
-        - Mỗi người: 7 lá bài trên tay<br>
-        - Giữa bàn: 8 lá bài ngửa<br>
-        - Phần còn lại: bài úp để rút<br><br>
-        <b>3. Lượt chơi & cách lấy bài:</b><br>
-        - Mỗi lượt có 15 giây<br>
-        - Toàn bộ các lá cùng team (có liên kết) sẽ được chuyển vào khu “Đã tìm thấy nhau”.<br>
-        - Hết bài trên tay: bắt buộc rút bài<br>
-        - Chỉ được chọn 1 trong 2 hành động:<br>
-        * <u>Lấy bài trên bàn</u>: Nếu bài trên tay hoặc bài trong khu “Đã tìm thấy nhau” có liên kết với bất kỳ lá nào trên bàn -> được lấy lá đó. (Bắt buộc phải có liên kết mới được lấy)<br>
-        * <u>Rút bài úp</u>: Được rút khi không thể lấy bài trên bàn hoặc chủ động không lấy. Sau khi rút có thể bỏ qua hoặc giữ lại trên tay.<br><br>
-        <b>4. Kết thúc & tính điểm:</b><br>
-        Ván kết thúc khi một bên hết toàn bộ bài hoặc không thể rút/liên kết thêm.<br>
-        - Mỗi liên kết: <b>+1 điểm</b><br>
-        - Đủ team: <b>+5 điểm</b><br>
-        - Mỗi lá lẻ trên tay: <b>-2 điểm</b>
-    </div>
+<div class="rules-sidebar">
+    <h3>LUẬT CHƠI</h3>
+    <p style="color: white; text-align: center; margin-bottom: 20px;">Luật chơi tương tự phiên bản cũ.</p>
+    
+    <button class="btn" 
+            style="background:#e67e22; color:#fff; padding: 10px; width: 100%;" 
+            onclick="showBackModal()">
+        Quay lại bản 1.0
+    </button>
+</div>
 
     <div class="play-main">
         <div class="play-area"><div id="ai-hand" class="card-row-scroll"></div><div class="captured-zone"><div class="zone-label"><span>Đã tìm thấy nhau</span> <span id="score-ai" style="color:#ff4757">0</span></div><div id="ai-captured" class="captured-list"></div></div></div>
@@ -521,6 +522,23 @@ function closeCoNha() {
 function goToCoNha() {
     closeCoNha();
     window.location.href = 'https://forms.gle/a3oqYKuHyV9TppEx5';
+}
+    // Hiển thị modal và tạm dừng thời gian game
+function showBackModal() {
+    isPaused = true;
+    document.getElementById('back-modal').classList.remove('hidden');
+}
+
+// Đóng modal và cho phép game tiếp tục chạy
+function closeBackModal() {
+    isPaused = false;
+    document.getElementById('back-modal').classList.add('hidden');
+}
+
+// Chuyển hướng đến link phiên bản cũ
+function goToVersion1() {
+    // Bạn thay link phiên bản 1 của bạn vào dấu nháy dưới đây nhé
+    window.location.href = 'https://link-ban-1-cua-ban.com';
 }
 </script>
 </body>
