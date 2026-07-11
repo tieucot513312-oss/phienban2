@@ -81,41 +81,6 @@
 
 <div id="pause-modal" class="modal-overlay hidden"><div class="modal-content"><h2 style="color:var(--accent);">☕ NGHỈ GIẢI LAO</h2><button class="btn" style="background:#3498db;" onclick="resumeGame()">OK TIẾP TỤC ▶</button></div></div>
 <div id="reset-modal" class="modal-overlay hidden"><div class="modal-content"><h2 style="color:#ff4757;">⚠️ CẢNH BÁO</h2><p>Bạn xác nhận muốn tạo lại ván mới?</p><div style="display:flex; gap:10px;"><button class="btn" style="background:#e74c3c; flex:1;" onclick="confirmReset()">CHẮC RỒI</button><button class="btn" style="background:#95a5a6; flex:1;" onclick="closeReset()">THÔI CHƠI TIẾP</button></div></div></div>
-<div id="conha-modal" class="modal-overlay hidden">
-    <div class="modal-content" style="background-color: #222; border: 2px solid #FFC107; border-radius: 12px; width: 420px; max-width: 90%; text-align: center; padding: 25px; color: #fff; font-family: sans-serif; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        
-        <h2 style="color: #fff; margin-top: 0; font-size: 30px; margin-bottom: 8px; font-weight: bold;">
-            Bạn muốn đổi qua phiên bản cợt nhã?
-        </h2>
-        <p style="color: #dda0dd; font-weight: bold; font-size: 18px; margin-bottom: 30px;">
-            Khó hơn, giành giật hơn nhưng mà xem lưu ý giúp mình.
-        <p style="color: #ff4757; font-weight: bold; font-size: 16px; margin-bottom: 6px;">
-             Lưu ý: Phiên bản này có zone 5 ngón tay (Map ẩn nha)
-        </p>
-
-        <div style="color: #ddd; font-size: 14px; line-height: 1.6; margin-bottom: 5px; text-align: left; padding: 0 10px;">
-            <p style="margin-bottom: 5px;">• Nếu bạn không cùng zone với mình, hãy ở lại đây, chúng ta vẫn là gia đình - Gai Con. </p>
-            <p style="margin-bottom: 5px;">• Nếu bạn không cùng zone với mình mà vẫn muốn chơi tiếp, hy vọng bạn chỉ xem đây là trò chơi, đừng đặt nặng vấn đề.</p>
-            <p>• Nếu cùng zone, come on bấy bì!</p>
-        </div>
-
-        <div style="display: flex; gap: 10px; justify-content: center;">
-            
-            <button onclick="closeCoNha()" 
-                    style="flex: 1; background-color: #555; color: #fff; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;">
-                Thôi ở lại đây
-            </button>
-            
-            <button onclick="goToCoNha()" 
-                    style="flex: 1; background-color: #3498db; color: #fff; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;">
-                Chơi luôn (Coming soon)
-            </button>
-            
-        </div>
-
-    </div>
-
-</div>
 <div id="back-modal" class="modal-overlay hidden">
     <div class="modal-content">
         <h2 style="color:#f1c40f; font-weight: bold; font-size: 20px;">Xác nhận quay lại phiên bản đơn giản?</h2>
@@ -171,7 +136,6 @@
     <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
         <button class="btn" style="background:#3498db;" onclick="togglePause()">Tạm dừng</button>
         <button class="btn" style="background:#9b59b6;" onclick="resetGame()">Làm lại</button>
-        <button class="btn" style="background:#ffffff; color:#000000; margin-top: 10px; border: 1px solid #ccc;" onclick="showCoNhaModal()">BẢN CỢT NHÃ</button>
     </div>
 </div>
 
